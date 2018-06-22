@@ -7,7 +7,8 @@ import datetime
 from django.http import HttpResponse
 
 
-
+def test(request):
+    return render(request,'olx/test.html',{})
 
 
 class CreateAdvertisementView(CreateView):

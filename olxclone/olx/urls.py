@@ -6,6 +6,8 @@ app_name='olx'
 
 urlpatterns = [
 
+    path('test/',test,name='test'),
+
     path('sample/',sample,name='sample'),
 
     path('signup/', SignUpView.as_view(), name='signup'),
