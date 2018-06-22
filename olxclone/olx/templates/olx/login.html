@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="col-xs-6 col-xs-offset-3">
+    <form method="post">
+
+        {% csrf_token %}
+
+        <fieldset>
+            <legend>
+                {{ title }}
+            </legend>
+
+
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">Password</label>
+                {{ form.password }}
+            </div>
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+        <a href="{% url 'olx:signup' %}">Go to signup>></a>
+    </div>
+</div>
+
+
+{% endblock %}

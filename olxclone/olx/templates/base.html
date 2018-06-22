@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library |||-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript |||-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+
+    <style>
+        .post-container{
+        margin: 30px 20px 20px 20px;
+        border:5px solid #222;
+        }
+
+        .post-thumb img {
+            float: left;
+            clear:left;
+            margin-right:80px;
+        }
+        .post-title{
+            float:left;
+        }
+        .post-content {float:right;margin-right:8px;}
+        .clear{clear:both;}
+
+    </style>
+
+</head>
+<body>
+
+     {% if request.user.is_authenticated %}
+        <form id="logout" method="post" action="{% url 'olx:logout'%}">
+                    {% csrf_token %}
+                    <a href="#" onclick="document.getElementById('logout').submit();">Logout</a>
+                </form>
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+</html>
+
+
+
