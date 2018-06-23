@@ -22,6 +22,9 @@ urlpatterns = [
 
     path('create_advt/',CreateAdvertisementView.as_view(),name='create_advt'),
 
+    path('search_advt/',search_advt,name='search_advt'),
+
+
 ]
 
 
