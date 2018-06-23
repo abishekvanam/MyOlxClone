@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% for advt in advt_list %}
 
 <div class='div1'>
-    <img src="C:\Users\Dell\Pictures\2016-06\DSC01446.jpg">
+    <a href="{% url 'olx:advt_detail_view' advt.id %}">
+    <img src="{{advt.image.url}}" alt="lol">
+    </a>
 
     <div style="overflow: hidden;">
-    <p style="float: left;">content1</p>
-    <p style="float: right;">content2</p>
+    <a href="{% url 'olx:advt_detail_view' advt.id %}">
+        <p style="float: left;"><b>{{advt.title}}</b></p>
+    </a>
+    <p style="float: right;">{{advt.price}}</p>
 </div>
-    <p>Hello</p>
-    <p class="middle_p">Lol</p>
+    <p>Category:{{advt.category}}</p>
+    <p>Posted On:{{advt.posted_on}}</p>
 
     </div>
+
+{% endfor %}
 
 
 {% endblock %}

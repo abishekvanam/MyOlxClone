@@ -22,7 +22,7 @@ class AdvtDetailView(DetailView):
 
     model=Advertisement
     template_name = 'olx/advt_detail.html'
-    context_object_name = 'advt_detail'
+    #context_object_name = 'advt_detail'
 
     def get_object(self, queryset=None):
         return get_object_or_404(Advertisement,**self.kwargs)
@@ -32,6 +32,8 @@ class AdvtDetailView(DetailView):
         context = super(AdvtDetailView, self).get_context_data(**kwargs)
 
         advt=context.get('advertisement')
+
+
 
         context.update(
             {'advt':advt}
