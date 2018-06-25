@@ -57,8 +57,16 @@ class ChatListView(ListView):
 
         context.update({'user_permissions':self.request.user.get_all_permissions})
 
+        my_chats=list(ChatBox.objects.filter(receiver__id=self.request.user.id))
+        received_chats=ChatBox.objects.filter(messages__sender__id=self.request.user.id)
+
+        if received_chats.exists():
+            r=[]
+            r.append(received_chats[0])
+            my_chats+=r
+
         context.update(
-            {'my_chats':ChatBox.objects.filter(receiver__id=self.request.user.id)}
+            {'my_chats':my_chats}
         )
 
         return context
