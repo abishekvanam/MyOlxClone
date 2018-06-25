@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+{% if my_chats %}
+{% for chat in my_chats %}
+<a href="">{{chat}}</a>
+{% endfor %}
+{% else %}
+<h1>No chats to display!!!</h1>
+{% endif %}
+
+{% endblock %}
+
+

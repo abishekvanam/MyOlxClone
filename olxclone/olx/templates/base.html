@@ -19,6 +19,81 @@
 
 
     <style>
+
+
+    <!--.macro{-->
+        <!--margin-top:5px;width:85%;border-radius:5px;padding:5px;display:flex;-->
+    <!--}-->
+    <!--.msj-rta{-->
+        <!--float:right;background:whitesmoke;-->
+    <!--}-->
+    <!--.msj{-->
+        <!--float:left;background:white;-->
+    <!--}-->
+    <!--.frame{-->
+        <!--background:#e0e0de;-->
+        <!--height:450px;-->
+        <!--overflow:hidden;-->
+        <!--padding:0;-->
+    <!--}-->
+    <!--.frame > div:last-of-type{-->
+        <!--position:absolute;bottom:0;width:100%;display:flex;-->
+    <!--}-->
+    <!--body > div > div > div:nth-child(2) > span{-->
+        <!--background: whitesmoke;padding: 10px;font-size: 21px;border-radius: 50%;-->
+    <!--}-->
+    <!--body > div > div > div.msj-rta.macro{-->
+        <!--margin:auto;margin-left:1%;-->
+    <!--}-->
+    <!--ul {-->
+        <!--width:100%;-->
+        <!--list-style-type: none;-->
+        <!--padding:18px;-->
+        <!--position:absolute;-->
+        <!--bottom:47px;-->
+        <!--display:flex;-->
+        <!--flex-direction: column;-->
+        <!--top:0;-->
+        <!--overflow-y:scroll;-->
+    <!--}-->
+    <!--.msj:before{-->
+        <!--width: 0;-->
+        <!--height: 0;-->
+        <!--content:"";-->
+        <!--top:-5px;-->
+        <!--left:-14px;-->
+        <!--position:relative;-->
+        <!--border-style: solid;-->
+        <!--border-width: 0 13px 13px 0;-->
+        <!--border-color: transparent #ffffff transparent transparent;-->
+    <!--}-->
+    <!--.msj-rta:after{-->
+        <!--width: 0;-->
+        <!--height: 0;-->
+        <!--content:"";-->
+        <!--top:-5px;-->
+        <!--left:14px;-->
+        <!--position:relative;-->
+        <!--border-style: solid;-->
+        <!--border-width: 13px 13px 0 0;-->
+        <!--border-color: whitesmoke transparent transparent transparent;-->
+    <!--}-->
+    <!--input:focus{-->
+        <!--outline: none;-->
+    <!--}-->
+
+
+
+
+
+
+
+
+
+
+
+
+
         .div1 {
 
             background-color: white;
@@ -75,7 +150,7 @@
 
         .navbar-custom {
          color:white;
-    background-color: lightgreen;
+        background-color: lightgreen;
 }
 
 .navbar-default {
@@ -140,7 +215,7 @@ background-color: transparent;
           <a href="#" class="dropdown-toggle nav_a" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.user.username}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">My Profile</a></li>
-            <li><a href="#">Another action</a></li>
+            <li><a href="{% url 'olx:chat_list' %}">My Chats</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{% url 'olx:logout' %}">Logout</a></li>
@@ -151,8 +226,8 @@ background-color: transparent;
         {% else %}
 
             <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'olx:login' %}">Login</a></li>
-            <li><a href="{% url 'olx:signup' %}">Signup</a></li>
+            <li><a href="{% url 'olx:login' %}" class="nav_a">Login</a></li>
+            <li><a href="{% url 'olx:signup' %}" class="nav_a">Signup</a></li>
             </ul>
 
         {% endif %}

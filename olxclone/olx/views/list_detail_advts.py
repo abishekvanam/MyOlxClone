@@ -53,6 +53,21 @@ def search_advt(request):
     return render(request,'olx/advts_list.html',{'advt_list':advt_list})
 
 
+def like_advt(request,advt_id):
+
+
+    a=Advertisement.objects.get(id=advt_id)
+
+
+
+    a.interested_count+=1
+
+    a.save()
+
+    return redirect('olx:advt_detail_view',advt_id)
+
+    pass
+
 
 # class SearchAdvertisementView(ListView):
 #     model = Advertisement

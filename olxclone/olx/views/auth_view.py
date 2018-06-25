@@ -79,7 +79,7 @@ class LoginView(View):
             return render(
                 request,
                 'olx/signup.html',
-                {'form': form}
+                {'form': SignUpForm}
             )
 
 

@@ -9,34 +9,42 @@
 
     <h1>{{advt.title}}
     </h1>
-    <br>
-    <br>
+
    <div style="overflow: hidden;">
        <p style="float:left;clear:right"><b>Description:</b>
        <div style="float:left;" class="content">
        {{advt.description}}
-   </div></p>
+   </div>
+       </p>
     </div>
-    <br>
-    <br>
+
     <p><b>Category:</b>{{advt.category}}</p>
-    <br>
-    <br>
-    <br>
+
     <p><b>Type:</b>{{advt.item_type}}</p>
-    <br>
-    <br>
-    <br>
+
     <p><b>Price:{{advt.price}}</b></p>
-    <br>
-    <br>
-    <br>
+
     <p><b>Interested:</b>{{advt.interested_count}}</p>
-    <br>
-    <br>
 
 
     <p><b>Posted on:</b>{{advt.posted_on}}</p>
+
+    <table>
+        <tr>
+            <td>
+                <form action="{% url 'olx:like' advt.id %}">
+                    <button type="submit" class="btn btn-primary">Like</button>
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'olx:start_chat' advt.id %}">
+                    <button type="submit" class="btn btn-primary">Chat</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
 
     </div>
 

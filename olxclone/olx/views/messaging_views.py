@@ -1,0 +1,65 @@
+from django.shortcuts import get_object_or_404,render,redirect
+from olx.models import *
+from django.db.models import Q
+from django.views.generic import ListView,DetailView
+
+def start_chat(request,advt_id):
+
+    if request.method=='POST':
+
+        chat_message=request.POST['chat_message']
+
+        advt_obj=Advertisement.objects.get(id=advt_id)
+
+        if ChatBox.objects.exists() and ChatBox.objects.filter(advt__id=advt_id).exists():
+
+
+            chat_obj = ChatBox.objects.get(advt__id=advt_id)
+
+            chat_box_obj=chat_obj
+
+
+        else:
+
+            # advt_obj = Advertisement.objects.values('my_user','id').get(id=advt_id)
+
+            chat_obj1 = ChatBox(receiver=advt_obj.my_user, advt=advt_obj)
+
+            chat_obj1.save()
+
+            chat_box_obj = chat_obj1
+
+
+        msg=Messages(message_text=chat_message,chat_box=chat_box_obj,sender=request.user)
+        msg.save()
+
+        return render(request,'olx/my_messages.html',
+                      {
+                        'my_messages':Messages.objects.filter(Q(chat_box__advt__id=advt_id)&
+                                                              Q(sender=request.user)&
+                                                              Q(chat_box__receiver=advt_obj.my_user)),
+
+                        'advt_id':advt_id
+                      })
+
+    return render(request,'olx/my_messages.html',{'my_messages':[],'advt_id':advt_id})
+
+
+class ChatListView(ListView):
+
+    model=ChatBox
+
+    template_name = 'olx/chat_list.html'
+
+    def get_context_data(self, **kwargs):
+
+        context=super(ChatListView,self).get_context_data(**kwargs)
+
+        context.update({'user_permissions':self.request.user.get_all_permissions})
+
+        context.update(
+            {'my_chats':ChatBox.objects.filter(receiver__id=self.request.user.id)}
+        )
+
+        return context
+
