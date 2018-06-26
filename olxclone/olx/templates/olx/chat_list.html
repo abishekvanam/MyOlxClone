@@ -6,7 +6,15 @@
 
 {% if my_chats %}
 {% for chat in my_chats %}
-<a href="">{{chat}}</a>
+{% if chat.sender == request.user.username %}
+
+<a href="{% url 'olx:chat_detail_view' chat.id %}">{{chat.receiver.username}}</a>
+
+{% else %}
+
+<a href="{% url 'olx:chat_detail_view' chat.id %}">{{chat.sender}}</a>
+
+{% endif %}
 {% endfor %}
 {% else %}
 <h1>No chats to display!!!</h1>

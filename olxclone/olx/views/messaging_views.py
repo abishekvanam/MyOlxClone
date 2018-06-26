@@ -11,10 +11,11 @@ def start_chat(request,advt_id):
 
         advt_obj=Advertisement.objects.get(id=advt_id)
 
-        if ChatBox.objects.exists() and ChatBox.objects.filter(advt__id=advt_id).exists():
+        if ChatBox.objects.exists() and ChatBox.objects.filter(Q(sender=request.user.username)|Q(receiver=request.user)).exists():
+                                        #ChatBox.objects.filter(advt__id=advt_id).exists():
 
-
-            chat_obj = ChatBox.objects.get(advt__id=advt_id)
+            chat_obj = ChatBox.objects.get(Q(sender=request.user.username)|Q(receiver=request.user))
+            #chat_obj = ChatBox.objects.get(advt__id=advt_id)
 
             chat_box_obj=chat_obj
 
@@ -23,7 +24,7 @@ def start_chat(request,advt_id):
 
             # advt_obj = Advertisement.objects.values('my_user','id').get(id=advt_id)
 
-            chat_obj1 = ChatBox(receiver=advt_obj.my_user, advt=advt_obj)
+            chat_obj1 = ChatBox(sender=request.user.username,receiver=advt_obj.my_user, advt=advt_obj)
 
             chat_obj1.save()
 
@@ -57,17 +58,41 @@ class ChatListView(ListView):
 
         context.update({'user_permissions':self.request.user.get_all_permissions})
 
-        my_chats=list(ChatBox.objects.filter(receiver__id=self.request.user.id))
-        received_chats=ChatBox.objects.filter(messages__sender__id=self.request.user.id)
+        my_chats=list(ChatBox.objects.filter(Q(receiver__id=self.request.user.id)|Q(sender=self.request.user.username)))
+        # received_chats=ChatBox.objects.filter(messages__sender__id=self.request.user.id)
 
-        if received_chats.exists():
-            r=[]
-            r.append(received_chats[0])
-            my_chats+=r
+        # if received_chats.exists():
+        #     r=[]
+        #     r.append(received_chats[0])
+        #     my_chats+=r
+
+        # import ipdb
+        # ipdb.set_trace()
 
         context.update(
             {'my_chats':my_chats}
         )
 
         return context
+
+
+
+
+def chat_detail_view(request,chat_id):
+
+    if request.method=='POST':
+        chat_message = request.POST['chat_message']
+        msg = Messages(message_text=chat_message, chat_box=ChatBox.objects.get(id=chat_id), sender=request.user)
+        msg.save()
+
+    msgs=Messages.objects.filter(chat_box__id=chat_id)
+
+    return render(request,'olx/chat_detail.html',
+                  {
+                      'all_messages':msgs,
+                      'chat_id':chat_id
+                  })
+
+    pass
+
 

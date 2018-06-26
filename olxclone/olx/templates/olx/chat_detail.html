@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-sm-3 col-sm-offset-4 frame">
+            <ul></ul>
+    <form method="post" action="{% url 'olx:chat_detail_view' chat_id %}">
+                        {% csrf_token %}
+
+            <div>
+
+                {% if all_messages %}
+                    {% for msg in all_messages %}
+
+                    <p>{{msg.message_text}}</p>
+                    {% endfor %}
+
+                {% else %}
+                <h4>No messages to show yet!</h4>
+                {% endif %}
+                <div class="msj-rta macro">
+                    <div class="text text-r" style="background:whitesmoke !important">
+                        <input class="mytext" placeholder="Type a message" name="chat_message"/>
+                    </div>
+
+                </div>
+
+                <div style="padding:10px;">
+                    <button class="btn btn-primary">Send</button>
+
+                </div>
+            </div>
+    </form>
+</div>
+
+
+
+{% endblock %}
+

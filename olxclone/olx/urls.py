@@ -42,6 +42,8 @@ urlpatterns = [
 
     path('chat_list/',ChatListView.as_view(),name='chat_list'),
 
+    path('chat_list/<int:chat_id>/',chat_detail_view,name='chat_detail_view')
+
 ]
 
 

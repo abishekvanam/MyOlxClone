@@ -42,6 +42,8 @@ class Advertisement(models.Model):
 
 class ChatBox(models.Model):
 
+    sender=models.TextField(max_length=100)
+
     receiver=models.ForeignKey(User,on_delete=models.CASCADE)
 
     advt=models.ForeignKey(Advertisement,on_delete=models.CASCADE)
