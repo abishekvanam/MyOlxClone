@@ -6,18 +6,23 @@
             <ul></ul>
     <form method="post" action="{% url 'olx:chat_detail_view' chat_id %}">
                         {% csrf_token %}
-
             <div>
+            <div class="div3_chatbox">
 
                 {% if all_messages %}
                     {% for msg in all_messages %}
-
+                    {% if msg.sender == request.user %}
+                    <p style="float:right;clear:both;">{{msg.message_text}}</p>
+                    {% else %}
                     <p>{{msg.message_text}}</p>
+                    {% endif %}
+                <br>
                     {% endfor %}
 
                 {% else %}
                 <h4>No messages to show yet!</h4>
                 {% endif %}
+            </div>
                 <div class="msj-rta macro">
                     <div class="text text-r" style="background:whitesmoke !important">
                         <input class="mytext" placeholder="Type a message" name="chat_message"/>
@@ -29,7 +34,7 @@
                     <button class="btn btn-primary">Send</button>
 
                 </div>
-            </div>
+        </div>
     </form>
 </div>
 
