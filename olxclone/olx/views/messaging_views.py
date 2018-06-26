@@ -11,11 +11,12 @@ def start_chat(request,advt_id):
 
         advt_obj=Advertisement.objects.get(id=advt_id)
 
-        if ChatBox.objects.exists() and ChatBox.objects.filter(Q(sender=request.user.username)|Q(receiver=request.user)).exists():
-                                        #ChatBox.objects.filter(advt__id=advt_id).exists():
+        if ChatBox.objects.exists() and (ChatBox.objects.filter(Q(sender=request.user.username)&Q(receiver=advt_obj.my_user)).exists() or ChatBox.objects.filter((Q(receiver=request.user)&Q(sender=advt_obj.my_user.username))).exists()):
 
-            chat_obj = ChatBox.objects.get(Q(sender=request.user.username)|Q(receiver=request.user))
-            #chat_obj = ChatBox.objects.get(advt__id=advt_id)
+
+            chat_obj=ChatBox.objects.get(Q(Q(sender=request.user.username)&Q(receiver=advt_obj.my_user))|Q(Q(receiver=request.user)&Q(sender=advt_obj.my_user.username)))
+
+
 
             chat_box_obj=chat_obj
 
@@ -94,5 +95,6 @@ def chat_detail_view(request,chat_id):
                   })
 
     pass
+
 
 

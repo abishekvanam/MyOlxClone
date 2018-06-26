@@ -11,14 +11,19 @@
     <form method="post" action="{% url 'olx:start_chat' advt_id %}">
                         {% csrf_token %}
             <div>
+                <div class="div3_chatbox" style="overflow-y: scroll;">
                 {% if my_messages %}
                     {% for msg in my_messages %}
-
-                    <p style="float:right;">{{msg.message_text}}</p>
+                    {% if msg.sender == request.user %}
+                    <p style="float:right;clear:both;">{{msg.message_text}}</p>
+                    {% else %}
+                    <p>{{msg.message_text}}</p>
+                    {% endif %}
                     {% endfor %}
                 {% else %}
                 <h4>No messages to show yet!</h4>
                 {% endif %}
+                </div>
                 <div class="msj-rta macro">
                     <div class="text text-r" style="background:whitesmoke !important">
                         <input class="mytext" placeholder="Type a message" name="chat_message"/>
