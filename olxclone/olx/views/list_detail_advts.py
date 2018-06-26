@@ -48,7 +48,7 @@ def search_advt(request):
 
     search_text=request.GET['search_box']
 
-    advt_list=Advertisement.objects.filter(Q(title__contains=search_text)| Q(category__contains=search_text)| Q(description__contains=search_text))
+    advt_list=Advertisement.objects.filter(Q(title__icontains=search_text)| Q(category__icontains=search_text)| Q(description__icontains=search_text))
 
     return render(request,'olx/advts_list.html',{'advt_list':advt_list})
 
