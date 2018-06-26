@@ -7,7 +7,7 @@
     <form method="post" action="{% url 'olx:chat_detail_view' chat_id %}">
                         {% csrf_token %}
             <div>
-            <div class="div3_chatbox">
+            <div class="div3_chatbox" style="overflow-y: scroll;">
 
                 {% if all_messages %}
                     {% for msg in all_messages %}
