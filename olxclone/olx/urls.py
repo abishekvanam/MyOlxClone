@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import *
-
+from.rest_views import *
 
 app_name='olx'
 
@@ -42,7 +42,24 @@ urlpatterns = [
 
     path('chat_list/',ChatListView.as_view(),name='chat_list'),
 
-    path('chat_list/<int:chat_id>/',chat_detail_view,name='chat_detail_view')
+    path('chat_list/<int:chat_id>/',chat_detail_view,name='chat_detail_view'),
+
+
+
+    #API
+    #***********************************************************************************
+
+    path('api/advt_list',AdvtListApiView.as_view(),name='api_advt_list_view'),
+
+    path('api/advt_list/<int:pk>/',AdvtDetailApiView.as_view(),name='api_advt_detail_view'),
+
+    path('api/create_advt/',AdvtCreateApiView.as_view(),name='api_create_advt_view'),
+
+
+    path('api/update_advt/<int:pk>/',AdvtUpdateApiView.as_view(),name='api_update_advt_view'),
+
+
+    path('api/delete_advt/<int:pk>/',AdvtDeleteApiView.as_view(),name='api_delete_advt_view'),
 
 ]
 
