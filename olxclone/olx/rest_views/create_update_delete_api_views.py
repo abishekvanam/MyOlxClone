@@ -10,6 +10,7 @@ from rest_framework.permissions import (
 from olx.permissions import *
 
 
+
 class AdvtCreateApiView(CreateAPIView):
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
