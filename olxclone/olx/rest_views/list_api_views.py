@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from olx.models import *
-from olx.serializers import *
+from olx.serializers import AdvertisementSerializer
 from rest_framework.filters import SearchFilter,OrderingFilter
 from olx.pagination import *
 from django.db.models import Q

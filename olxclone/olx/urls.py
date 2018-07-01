@@ -46,7 +46,7 @@ urlpatterns = [
 
 
 
-    #API
+    #Advt API
     #***********************************************************************************
 
     path('api/advt_list',AdvtListApiView.as_view(),name='api_advt_list_view'),
@@ -60,6 +60,14 @@ urlpatterns = [
 
 
     path('api/delete_advt/<int:pk>/',AdvtDeleteApiView.as_view(),name='api_delete_advt_view'),
+
+
+    #Chats API
+    #***********************************************************************************
+
+    path('api/chat_list',ChatListApiView.as_view(),name='api_chat_list'),
+
+
 
 ]
 

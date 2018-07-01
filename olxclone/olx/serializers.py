@@ -48,3 +48,18 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 
 
 
+
+class ChatSerializer(serializers.ModelSerializer):
+
+    receiver=SerializerMethodField()
+
+    class Meta:
+        model=ChatBox
+        fields=(
+            'sender',
+            'receiver',
+            'advt'
+        )
+
+    def get_receiver(self,obj):
+        return obj.receiver.username
