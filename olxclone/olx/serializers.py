@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from olx.models import *
-from rest_framework.serializers import HyperlinkedIdentityField
+from rest_framework.serializers import HyperlinkedIdentityField,SerializerMethodField
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
@@ -16,6 +16,12 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     delete_url=HyperlinkedIdentityField(
         view_name='olx:api_delete_advt_view'
     )
+
+    my_user=SerializerMethodField()
+    image=SerializerMethodField()
+    #Used to specify what attributes of an object
+    #to be serialized using the function below.
+    #Can be used for any objects mentioned below
 
     class Meta:
         model=Advertisement
@@ -33,6 +39,11 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'interested_count',
             'my_user')
 
+
+    def get_my_user(self,obj):
+        return obj.my_user.username
+    def get_image(self,obj):
+        return obj.image.url
 
 
 
