@@ -10,6 +10,6 @@ class AdvtLimitOffsetPagination(LimitOffsetPagination):
 
 
 class AdvtPageNumberPagination(PageNumberPagination):
-    page_size=2
+    page_size=3
     #Number of records which can be displayed in each page is the page_size
 
