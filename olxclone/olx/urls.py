@@ -45,11 +45,13 @@ urlpatterns = [
     path('chat_list/<int:chat_id>/',chat_detail_view,name='chat_detail_view'),
 
 
+    #APIs
+    #***********************************************************************************
 
     #Advt API
     #***********************************************************************************
 
-    path('api/advt_list',AdvtListApiView.as_view(),name='api_advt_list_view'),
+    path('api/advt_list/',AdvtListApiView.as_view(),name='api_advt_list_view'),
 
     path('api/advt_list/<int:pk>/',AdvtDetailApiView.as_view(),name='api_advt_detail_view'),
 
@@ -65,10 +67,14 @@ urlpatterns = [
     #Chats API
     #***********************************************************************************
 
-    path('api/chat_list',ChatListApiView.as_view(),name='api_chat_list'),
+    path('api/chat_list/',AllChatListApiView.as_view(),name='api_all_chat_list'),
 
 
+    path('api/advt_list/<int:pk>/chat_list/',ChatListApiView.as_view(),name='api_chat_list'),
+
+    path('api/chat_list/<int:pk>/',ChatDetailApiView.as_view(),name='api_chat_detail'),
 
 ]
+
 
 
