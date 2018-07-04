@@ -40,7 +40,15 @@ INSTALLED_APPS = [
     'olx.apps.OlxConfig',
     'crispy_forms',
     'rest_framework',
+    'webpack_loader',
 ]
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+            'BUNDLE_DIR_NAME': 'bundles/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+        }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +65,7 @@ ROOT_URLCONF = 'olxclone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates"), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,7 +91,6 @@ DATABASES = {
         'HOST': 'localhost',
         'USER':"root",
         'PASSWORD': "test1234",
-
     }
 }
 
