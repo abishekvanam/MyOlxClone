@@ -10,6 +10,14 @@ urlpatterns = [
 
     path('sample/',sample,name='sample'),
 
+    #React
+    #***********************************************************************************
+
+    path('signup', SignUpAPi.as_view(), name="sign_up"),
+
+    path('user_permissions', UserPermissionsApi.as_view(), name="user_permissions"),
+
+
     #Auth
     #***********************************************************************************
 

@@ -3,6 +3,15 @@ from olx.models import *
 from rest_framework.serializers import HyperlinkedIdentityField,SerializerMethodField
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('groups', 'user_permissions', 'is_staff', 'is_active', 'is_superuser')
+
+
+
+
+
 class MessagesSerializer(serializers.ModelSerializer):
 
     sender=SerializerMethodField()
