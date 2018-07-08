@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Redirect} from "react-router-dom";
-
+import Cookies from 'universal-cookie';
 import './Auth.css';
 
 class LoginComp extends Component{
-
+    cookies = new Cookies();
     createCookie(name,value,days) {
         if (days) {
             var date = new Date();
@@ -27,39 +27,58 @@ class LoginComp extends Component{
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
             body: `username=${name}&password=${pass}`
-        }).then(res => {
-            if(res.status==400)
-            {
-                alert("Invalid details")
+            }).then(function(response) {
+            return response.json();
+        })
+        .then((myJson) => {
+            if ('token' in myJson){
+                this.cookies.set('userJwtToken', myJson, { path: '/',expires: new Date(Date.now()+2592000)} );
+                this.cookies.set('username',name, {path : '/', expires: new Date(Date.now()+2592000)})
+                console.log(this.cookies.get('userJwtToken'));
+                this.props.setLoginStatus(true, name, "1");
+                this.setState(prev => ( {buttonName : 'Logout'}));
+                console.log("Redirecting....")
             }
-            else
-            {
-                res.json()
-                .then(response => {
-                    this.createCookie("JWT", response.token, 1);
-                    this.createCookie("username", name);
-                    fetch("http://127.0.0.1:8000/olx/user_permissions", {headers: {
-                        'Authorization': "JWT "+response.token
-                      }
-                    })
-                .then(res =>{
-                    if(res.status==403)
-                    {
-                        this.props.setLoginStatus(true, name, "0");
-                    }
-                    else
-                    {
-                        this.props.setLoginStatus(true, name, "1");
-                    }
-                })
-                })
+            else{
+                alert("Invalid Credentials");
             }
+        })
+        .catch(e => {console.log("Error occured in fetching details..")
         });
     }
+//        }).then(res => {
+//            if(res.status==400)
+//            {
+//                alert("Invalid details")
+//            }
+//            else
+//            {
+//                res.json()
+//                .then(response => {
+//                    this.createCookie("JWT", response.token, 1);
+//                    this.createCookie("username", name);
+//                    fetch("http://127.0.0.1:8000/olx/user_permissions", {headers: {
+//                        'Authorization': "JWT "+response.token
+//                      }
+//                    })
+//                .then(res =>{
+//                    if(res.status==403)
+//                    {
+//                        this.props.setLoginStatus(true, name, "0");
+//                    }
+//                    else
+//                    {
+//                        this.props.setLoginStatus(true, name, "1");
+//                    }
+//                })
+//                })
+//            }
+//        });
+//    }
 
     render(){
         return(
-        this.props.isLoggedIn?<Redirect to="/olx/sample/"/>:
+        this.props.isLoggedIn?<Redirect to="/olx/logouts"/>:
         <div>
             <div className="olxlogin-form">
                 <input className="form-control mr-sm-2" type="text" id="usernameField" placeholder="username"/>
@@ -72,6 +91,8 @@ class LoginComp extends Component{
 }
 
 export default LoginComp;
+
+
 
 
 
