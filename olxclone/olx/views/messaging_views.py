@@ -1,8 +1,11 @@
 from django.shortcuts import get_object_or_404,render,redirect
 from olx.models import *
 from django.db.models import Q
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url="olx:login")
 def start_chat(request,advt_id):
 
     if request.method=='POST':
@@ -78,7 +81,7 @@ class ChatListView(ListView):
 
 
 
-
+@login_required(login_url="olx:login")
 def chat_detail_view(request,chat_id):
 
     if request.method=='POST':
