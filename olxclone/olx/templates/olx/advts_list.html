@@ -12,7 +12,7 @@
     <a href="{% url 'olx:advt_detail_view' advt.id %}">
         <p style="float: left;"><b>{{advt.title}}</b></p>
     </a>
-    <p style="float: right;">Cost: {{advt.price}}/-</p>
+    <p style="float: right;">{{advt.price}}</p>
 </div>
     <p>Category:{{advt.category}}</p>
     <p>Posted On:{{advt.posted_on}}</p>

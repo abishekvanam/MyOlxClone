@@ -24,9 +24,8 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('olx.urls')),
-    #path('olx/',include('olx.urls')),
-    #path('', TemplateView.as_view(template_name="index.html")),
+    path('olx/',include('olx.urls')),
+    path('', TemplateView.as_view(template_name="index.html")),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_jwt_token),
 ]

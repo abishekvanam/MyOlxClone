@@ -17,13 +17,9 @@ urlpatterns = [
 
     path('user_permissions', UserPermissionsApi.as_view(), name="user_permissions"),
 
-    #Home
-    # ***********************************************************************************
-
-    path('',home,name='home'),
 
     #Auth
-    #************************************************************************************
+    #***********************************************************************************
 
 
     path('signup/', SignUpView.as_view(), name='signup'),
@@ -34,8 +30,6 @@ urlpatterns = [
 
     #Advt
     #***********************************************************************************
-
-
 
 
     path('advt_list/',AdvtListView.as_view(),name='advt_list_view'),
