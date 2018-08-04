@@ -23,7 +23,7 @@ class SignUpView(View):
                 {'form': form, 'title': 'Signup|TODO list'}
             )
         else:
-            return redirect('olx:sample')
+            return redirect('olx:advt_list_view')
 
     def post(self, request):
         form = SignUpForm(request.POST)
@@ -58,7 +58,7 @@ class LoginView(View):
                 {'form': form, 'title': 'Login|OLXClone'}
             )
         else:
-            return redirect('olx:sample')
+            return redirect('olx:advt_list_view')
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -85,7 +85,7 @@ class LoginView(View):
 
 def logout_user(request):
     logout(request)
-    return redirect('olx:login')
+    return redirect('olx:advt_list_view')
 
 
 
