@@ -2,6 +2,13 @@ from django.shortcuts import get_object_or_404,render,redirect
 from olx.models import *
 from django.db.models import Q
 from django.views.generic import ListView,DetailView
+from django.contrib.auth.decorators import login_required
+
+
+def home(request):
+    return render(request,'olx/home.html',{})
+
+
 
 class AdvtListView(ListView):
 
@@ -52,7 +59,7 @@ def search_advt(request):
 
     return render(request,'olx/advts_list.html',{'advt_list':advt_list})
 
-
+@login_required(login_url="olx:login")
 def like_advt(request,advt_id):
 
 
@@ -86,7 +93,4 @@ def like_advt(request,advt_id):
 #         context.update(
 #             {'advt_list':Advertisement.objects.filter}
 #         )
-
-
-
 

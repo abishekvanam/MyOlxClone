@@ -1,5 +1,4 @@
 """olxclone URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
 Examples:
@@ -24,8 +23,9 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('olx/',include('olx.urls')),
-    path('', TemplateView.as_view(template_name="index.html")),
+    path('',include('olx.urls')),
+    #path('olx/',include('olx.urls')),
+    #path('', TemplateView.as_view(template_name="index.html")),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_jwt_token),
 ]
@@ -34,10 +34,4 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
-
-
-
-
-
-
 
