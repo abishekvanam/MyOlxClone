@@ -25,7 +25,7 @@ SECRET_KEY = 'z(6p==!^a^yiz+tb1cr)ycez*26+*b=fwvoguwppcratlh1ad0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['myolx.pythonanywhere.com']
+ALLOWED_HOSTS = ['MyOlxClone.pythonanywhere.com']
 
 
 # Application definition
@@ -98,9 +98,9 @@ WSGI_APPLICATION = 'olxclone.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myOlx$olx_db', #'olx_db',
-        'HOST': 'myOlx.mysql.pythonanywhere-services.com', #'localhost',
-        'USER':'myOlx', #"root",
+        'NAME': 'MyOlxClone$olx_db', #'olx_db',
+        'HOST': 'MyOlxClone.mysql.pythonanywhere-services.com', #'localhost',
+        'USER':'MyOlxClone', #"root",
         'PASSWORD': "test1234",
     }
 }
